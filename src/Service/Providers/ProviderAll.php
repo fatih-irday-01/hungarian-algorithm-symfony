@@ -14,12 +14,14 @@ final class ProviderAll
 
 
     public function getResponse(){
-
+        $datas = [];
         foreach ($this->providers as $provider) {
             $cli = new $provider;
-            print_r($cli->getData());
+            $newData = $cli->getData();
+            $datas = array_merge($datas , $newData);
         }
 
+        return $datas;
     }
 
 

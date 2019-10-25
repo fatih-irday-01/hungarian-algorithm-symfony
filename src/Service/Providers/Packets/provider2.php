@@ -29,6 +29,7 @@ class provider2 implements ProviderInterface
         foreach ($this->content as $item) {
             $this->data[] = [
                 'name' => $item['id'],
+                'sort_name' => ltrim($item['id'],'IT Task '),
                 'level' => $item['zorluk'],
                 'duration' => $item['sure'],
             ];

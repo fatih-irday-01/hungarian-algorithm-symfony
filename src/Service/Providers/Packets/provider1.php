@@ -31,6 +31,7 @@ class provider1 implements ProviderInterface
             $key = key($item);
             $this->data[] = [
                 'name' => $key,
+                'sort_name' => ltrim($key,'Business Task '),
                 'level' => $item[$key]['level'],
                 'duration' => $item[$key]['estimated_duration'],
             ];
