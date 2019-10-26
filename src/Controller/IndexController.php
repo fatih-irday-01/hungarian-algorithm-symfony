@@ -2,14 +2,11 @@
 
 namespace App\Controller;
 
-use App\Entity\Developers;
 use App\Repository\DevelopersRepository;
+use App\Repository\JobsRepository;
 use App\Service\JobServices;
-use App\Service\Providers\ProviderAll;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
-use \App\Entity\JobEntity as EntityJobs;
 
 
 class IndexController extends AbstractController
@@ -20,23 +17,17 @@ class IndexController extends AbstractController
     /**
      * @Route("/", name="Index")
      */
-    public function index(DevelopersRepository $developersRepository)
+    public function index(DevelopersRepository $developersRepository, JobsRepository $jobsRepository)
     {
 
-//        $strJsonFileContents = file_get_contents("/var/www/html/symfony/blog/src/Controller/index.json");
-//        $_getir = json_decode($strJsonFileContents, true);
-//        return new JsonResponse($_getir);
+        $jobs = new JobServices();
 
-//        $developers = $developersRepository->findAll(\PDO::FETCH_ASSOC);
-//        foreach ($developers as $developer) {
-//            print_r($developer);
-//            break;
-//        }
+        $jobs->developerRunTime = 45;
+        $jobs->jobs = $jobsRepository->findBy([], ['level'=>'asc']);
+        $jobs->developers = $developersRepository->findBy([], ['ability'=>'asc']);
+        $e = $jobs->atamaYap();
 
-//        $jobs = new JobServices();
-//        $jobs->jobs = $_getir;
-//        $jobs->developers = $devs;
-//        $e = $jobs->atamaYap();
+        print_r($e);
 
         exit();
 

@@ -2,21 +2,21 @@
 
 namespace App\Repository;
 
-use App\Entity\JobEntity;
+use App\Entity\Jobs;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
- * @method JobEntity|null find($id, $lockMode = null, $lockVersion = null)
- * @method JobEntity|null findOneBy(array $criteria, array $orderBy = null)
- * @method JobEntity[]    findAll()
- * @method JobEntity[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Jobs|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Jobs|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Jobs[]    findAll()
+ * @method Jobs[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class JobsRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, JobEntity::class);
+        parent::__construct($registry, Jobs::class);
     }
 
     // /**
