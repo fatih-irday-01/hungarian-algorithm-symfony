@@ -3,61 +3,99 @@
 
 namespace App\Service;
 
+use Hungarian\Hungarian;
+
 
 class JobServices
 {
 
 
-    public $developerRunTime = 45;
-    public $developers = [];
-    public $jobs       = [];
-
-
-    public function atamaYap()
+    public function __construct($developersRepository, $jobsRepository)
     {
+        $this->developers = $developersRepository->findAll();
+        $this->jobs       = $jobsRepository->findAll();
 
-        $jobList = [];
-        $devList = [];
+        $this->treeJobs = array_chunk($this->jobs, count((array)$this->developers));
+        $this->developerGroup = [];
+        $this->jobsGroup = [];
+    }
+
+
+    public function createMatris()//: array
+    {
+//
+//        $matrix = [
+//            [1, 2, 3, 0, 1],
+//            [0, 3, 12, 1, 1],
+//            [3, 0, 1, 13, 1],
+//            [3, 1, 1, 12, 0],
+//            [3, 1, 1, 12, 0],
+//        ];
+//
+//        $hungarian  = new Hungarian($matrix);
+//        $allocation = $hungarian->solveMin();
+//        print_r($allocation);
 
 
 
-        foreach ($this->developers as $developer) {
 
-            if (empty($devList[$developer->getAbility()])) {
-                $devList[$developer->getAbility()] = [];
-            }
-            $devList[$developer->getAbility()][] = [
-                'id' => $developer->getId(),
-                'runTime' => 0
-            ];
+        echo '<pre>';
+
+
+        foreach ($this->treeJobs as $treeJobs) {
+            $addMatrix = [];
+            $this->oneMatrix($treeJobs);
         }
 
 
-        foreach ($this->jobs as $job) {
 
-
-            // is ile ayni seviyede yazilimci, var mi ?
-            if(!empty($devList[$job->getLevel()])){
-
-                foreach ($devList[$job->getLevel()] as $key=>$item) {
-                    if($item['runTime'] < $this->developerRunTime){
-                        $devList[$job->getLevel()][$key]['runTime'] += $job->getDuration();
-                        $jobList[$job->getId()] = $item['id'];
-                        break;
-                    }
-                }
-
-
-            }else{
-                dd($devList[$job->getLevel()]);
-            }
-
-
-        }
-        print_r($jobList);
-        print_r($devList);
 
     }
+
+    private function oneMatrix($treeJobs)
+    {
+        $row = 0;
+        foreach ($this->developers as $k => $developer) {
+
+            $devId = $developer->getId(); // islem yapilan dev id
+            $this->developerGroup[$row] = $devId; // bu dev matrix'in kacinci sarasinda ?
+
+
+            $row2 = 0;
+            foreach ($treeJobs as $treeJob) { // job grubunu her developer icin matrix'e ekle
+
+                $jobId = $treeJob->getId();
+                $this->jobsGroup[$row][$row2] = $jobId; // job'un matrixteki yeri
+
+                $e = $this->developerToJob($developer, $treeJob);
+
+                $row2++;
+            }
+
+            echo '<br />';
+
+            $row++;
+        }
+        echo '------------0---------------';
+        echo '<br />';
+    }
+
+
+
+
+
+
+
+    private function developerToJob($developer, $treeJob)
+    {
+
+
+        echo ($treeJob->getDuration() * $treeJob->getLevel() / $developer->getA);
+        dd();
+
+
+    }
+
 
 
 }

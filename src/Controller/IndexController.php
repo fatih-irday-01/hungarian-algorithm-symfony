@@ -20,14 +20,9 @@ class IndexController extends AbstractController
     public function index(DevelopersRepository $developersRepository, JobsRepository $jobsRepository)
     {
 
-        $jobs = new JobServices();
+        $jobs = new JobServices($developersRepository,$jobsRepository);
+        $jobs->createMatris();
 
-        $jobs->developerRunTime = 45;
-        $jobs->jobs = $jobsRepository->findBy([], ['level'=>'asc']);
-        $jobs->developers = $developersRepository->findBy([], ['ability'=>'asc']);
-        $e = $jobs->atamaYap();
-
-        print_r($e);
 
         exit();
 
@@ -41,8 +36,12 @@ class IndexController extends AbstractController
      */
     public function deneme()
     {
+        $originalArray = [
+            1,2,3,4,5,6,7,8,9,10
+        ];
+        $newArray = array_chunk($originalArray, 5);
 
-
+        print_r($newArray);
 
         exit();
 
