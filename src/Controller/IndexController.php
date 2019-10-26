@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Developers;
 use App\Repository\DevelopersRepository;
 use App\Service\JobServices;
 use App\Service\Providers\ProviderAll;
@@ -39,8 +40,20 @@ class IndexController extends AbstractController
 
         exit();
 
+    }
 
 
+
+
+    /**
+     * @Route("/deneme", name="Demo")
+     */
+    public function deneme()
+    {
+
+
+
+        exit();
 
     }
 }

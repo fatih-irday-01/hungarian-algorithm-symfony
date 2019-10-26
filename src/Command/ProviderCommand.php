@@ -33,21 +33,33 @@ class ProviderCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
 
-        // TODO : eski veriler ne olacak ?
-
         $client = new providerAll();
         $getir = $client->getResponse();
 
         $manager = $this->container->get('doctrine')->getManager();
-        foreach ($getir as $item) {
-            $jobs = new JobEntity();
-            $jobs->setName($item['name'])
-                ->setLevel($item['level'])
-                ->setDuration($item['duration']);
-            $manager->persist($jobs);
-        }
+//        foreach ($getir as $item) {
+//            $jobs = new JobEntity();
+//            $jobs->setName($item['name'])
+//                ->setLevel($item['level'])
+//                ->setDuration($item['duration']);
+//            $manager->persist($jobs);
+//        }
+//
+//        $manager->flush();
 
-        $manager->flush();
+
+        $sqls = '';
+
+        foreach ($getir as $item) {
+            $name  = $item['name'];
+            $level = $item['level'];
+            $duration = $item['duration'];
+
+            $sqls .= "INSERT INTO is_atama1.jobs (`name`,`level`,`duration`) VALUES ('{$name}',{$level},{$duration})
+                        ON DUPLICATE KEY UPDATE `level`={$level}, `duration`={$duration};\n";
+        }
+        $prepare = $manager->getConnection()->prepare($sqls);
+        $prepare->execute();
 
         $output->writeln('MESSAGE : islem tamamlandi');
 
