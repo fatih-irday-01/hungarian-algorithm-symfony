@@ -1,5 +1,6 @@
 <?php
-
+set_time_limit(0);
+ini_set('max_execution_time', 0);
 use App\Kernel;
 use Symfony\Component\Debug\Debug;
 use Symfony\Component\HttpFoundation\Request;

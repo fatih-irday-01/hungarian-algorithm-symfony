@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Repository\DevelopersRepository;
 use App\Repository\JobsRepository;
 use App\Service\JobServices;
+use Hungarian\Hungarian;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -21,7 +22,7 @@ class IndexController extends AbstractController
     {
 
         $jobs = new JobServices($developersRepository,$jobsRepository);
-        $jobs->createMatris();
+        $jobs->jobsToDeveloper();
 
 
         exit();
@@ -37,11 +38,20 @@ class IndexController extends AbstractController
     public function deneme()
     {
         $originalArray = [
-            1,2,3,4,5,6,7,8,9,10
-        ];
-        $newArray = array_chunk($originalArray, 5);
 
-        print_r($newArray);
+            [7, 12, 6, 20, 14],
+            [4, 6, 3, 10, 7],
+            [2, 4, 2, 7, 5],
+            [2, 3, 2, 5, 4],
+            [1, 2, 1, 4, 3],
+
+        ];
+
+
+
+        $hungarian  = new Hungarian($originalArray);
+        $allocation = $hungarian->solveMin();
+        dd($allocation);
 
         exit();
 
