@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Repository\DevelopersRepository;
 use App\Repository\JobsRepository;
-use App\Service\JobServices;
+use App\Repository\DevelopersJobsRepository;
+
+use App\Service\JobToDeveloperServices;
 use Hungarian\Hungarian;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,16 +16,19 @@ class IndexController extends AbstractController
 {
 
 
-
     /**
      * @Route("/", name="Index")
      */
-    public function index(DevelopersRepository $developersRepository, JobsRepository $jobsRepository)
+    public function index(DevelopersRepository $developersRepository, JobsRepository $jobsRepository, DevelopersJobsRepository $developersJobsRepository)
     {
 
-        $jobs = new JobServices($developersRepository,$jobsRepository);
-        $jobs->jobsToDeveloper();
+        $developers = $developersRepository->findAll();
+        $jobs       = $jobsRepository->findAll();
 
+        $jobs = new JobToDeveloperServices($developers,$jobs);
+        $result = $jobs->jobsToDeveloper();
+
+        dd($result);
 
         exit();
 
