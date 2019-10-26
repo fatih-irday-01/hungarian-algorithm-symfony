@@ -43,7 +43,7 @@ class JobServices
         $matrixDesc = 0;
         foreach ($this->treeJobs as $treeJobs) {
 //        foreach ([end($this->treeJobs)] as $treeJobs) {
-            $addMatrix = $this->oneMatrix($matrixDgit esc, $treeJobs);
+            $addMatrix = $this->oneMatrix($matrixDesc, $treeJobs);
             $allMatrix[] = $addMatrix;
             $matrixDesc++;
         }
