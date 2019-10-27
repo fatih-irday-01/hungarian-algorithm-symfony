@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello IndexController!{% endblock %}
+{% block title %}Yazılımcıların Haftalık Planı{% endblock %}
 
 {% block body %}
 <style>
@@ -9,8 +9,55 @@
 </style>
 
 <div class="example-wrapper">
-   <pre>
-       {{ dump(rapor) }}
-   </pre>
+
+
+      {% for rapor in raporlar %}
+         <table class="table bg-white mt-5">
+
+
+            <thead class="badge-info pl-2 ">
+            <tr>
+               <th scope="col" colspan="5" class="text-center"><h5>{{ rapor.developer.name }} ( {{ rapor.developer.ability }}x )</h5></th>
+            </tr>
+            </thead>
+
+            {% for hafta, veri in rapor.plan %}
+               <thead class="table-dark pl-2">
+               <tr>
+                  <th scope="col" colspan="5"><h6>{{ hafta }}. Hafta</h6></th>
+               </tr>
+               </thead>
+
+
+               <thead class="table-primary pl-2">
+               <tr>
+                  <th><small>İşin İsmi</small></th>
+                  <th><small>İşin Zorluk seviyesi</small></th>
+                  <th><small>iş tanımındaki süre</small></th>
+                  <th><small>İşin yazılımcı için süresi</small></th>
+                  <th><small>{{hafta}}. Hafta ayıracağı süre</small></th>
+               </tr>
+               </thead>
+
+               <tbody class="table-bordered">
+                  {% for isler in veri %}
+                     <tr>
+                        <td><small>{{isler.name}}</small></td>
+                        <td><small>{{isler.level}}x</small></td>
+                        <td><small>{{isler.duration}} sa.</small></td>
+                        <td><small>{{isler.developerTotalRunTime}} sa.</small></td>
+                        <td><small>{{isler.runTime}} sa.</small></td>
+                     </tr>
+                  {% endfor %}
+               </tbody>
+
+            {% endfor %}
+
+      </table>
+   {% endfor %}
+
+
+
+
 </div>
 {% endblock %}

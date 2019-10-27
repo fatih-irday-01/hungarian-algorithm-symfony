@@ -33,7 +33,7 @@ class IndexController extends AbstractController
 
         /* hazirlanmis verileri getir */
         $developers = $developersRepository->findAll();
-        $devToJobs   = $developersJobsRepository->findBy([],['sequence' => 'ASC']);
+        $devToJobs   = $developersJobsRepository->findBy([],['sequence' => 'asc']);
         $jobs       = $jobsRepository->findAll();
 
 
@@ -60,7 +60,6 @@ class IndexController extends AbstractController
             $jobMaps[$key] = $job;
         }
 
-
         /* iler ve yazilimcilar islenebilir sekilde esitle */
         foreach ($devToJobs as $devToJob)
         {
@@ -69,11 +68,11 @@ class IndexController extends AbstractController
             $developerMaps[$devToJob->getDeveloperid()]['jobs'][$devToJob->getSequence()] = [
                 'name' => $getJob->getName(),
                 'duration' => $getJob->getDuration(),
-                'runTime' => $devToJob->getRunTimer()
+                'runTime' => $devToJob->getRunTimer(),
+                'level' => $getJob->getLevel(),
             ];
         }
 
-//        dd($developerMaps);
 
 
 
@@ -143,9 +142,9 @@ class IndexController extends AbstractController
 
         }
 
-
+//        dd($haftalikRapor);
         return $this->render('Index/index.html.twig', [
-            'rapor' => $haftalikRapor
+            'raporlar' => $haftalikRapor
         ]);
 
 
