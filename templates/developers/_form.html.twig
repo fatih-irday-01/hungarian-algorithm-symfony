@@ -1,4 +1,21 @@
+
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+
+
+    <div class="form-group">
+        {{ form_widget(form.name, {'attr': {'class': 'form-control', 'placeholder' : 'isim'}}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_widget(form.ability, {'attr': {'class': 'form-control', 'placeholder' : 'yetenek', 'type' : 'integer', 'min':1, 'max':5}}) }}
+    </div>
+
+    <div class="form-group">
+        <button class="btn btn-info float-lg-right">{{ button_label|default('Kaydet') }}</button>
+    </div>
+
+    <div class="my-custom-class-for-errors">
+        {{ form_errors(form) }}
+    </div>
+
 {{ form_end(form) }}

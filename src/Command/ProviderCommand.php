@@ -4,14 +4,8 @@
 namespace App\Command;
 
 
-use App\Entity\Jobs as JobEntity;
-use App\Entity\Developers as DevelopersEntity;
-use App\Entity\DevelopersJobs as DevelopersJobsEntity;
-
-use App\Service\JobToDeveloperServices;
 use App\Service\Providers\ProviderAll;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;

@@ -8,7 +8,6 @@ use App\Repository\DevelopersRepository;
 use App\Repository\JobsRepository;
 
 use App\Service\JobToDeveloperServices;
-use http\Env\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
@@ -144,7 +143,10 @@ class IndexController extends AbstractController
 
         }
 
-        dd($haftalikRapor);
+
+        return $this->render('Index/index.html.twig', [
+            'rapor' => $haftalikRapor
+        ]);
 
 
     }
@@ -153,9 +155,19 @@ class IndexController extends AbstractController
 
 
     /**
-     * @Route("/hesaplama", name="hesaplama")
+     * @Route("/hesapla", name="hesapla")
      */
-    public function hesaplama(DevelopersRepository $developersRepository, JobsRepository $jobsRepository)
+    public function hesapla(DevelopersRepository $developersRepository, JobsRepository $jobsRepository)
+    {
+
+        return $this->render('Index/hesapla.html.twig');
+
+    }
+
+    /**
+     * @Route("/hesaplamayap", name="hesaplama")
+     */
+    public function hesaplamayap(DevelopersRepository $developersRepository, JobsRepository $jobsRepository)
     {
 
         $developers = $developersRepository->findAll();

@@ -3,11 +3,11 @@
 {% block title %}Edit Developers{% endblock %}
 
 {% block body %}
-    <h1>Edit Developers</h1>
 
-    {{ include('developers/_form.html.twig', {'button_label': 'Update'}) }}
+    <h3 class="alert alert-info mt-3" >Yazılımcıyı Düzenle</h3>
 
-    <a href="{{ path('developers_index') }}">back to list</a>
+    {{ include('developers/_form.html.twig', {'button_label': 'Düzenle'}) }}
 
-    {{ include('developers/_delete_form.html.twig') }}
+
+    <a class="btn btn-dark float-lg-left" href="{{ path('developers_index') }}">Develepoer Listesine Dön</a>
 {% endblock %}

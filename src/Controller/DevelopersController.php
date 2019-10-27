@@ -78,17 +78,5 @@ class DevelopersController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{id}", name="developers_delete", methods={"DELETE"})
-     */
-    public function delete(Request $request, Developers $developer): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$developer->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($developer);
-            $entityManager->flush();
-        }
 
-        return $this->redirectToRoute('developers_index');
-    }
 }

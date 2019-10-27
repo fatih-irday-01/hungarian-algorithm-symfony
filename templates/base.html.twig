@@ -3,13 +3,34 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+            <link href="{{ asset('../templates/css/bootstrap.min.css') }}" type="text/css" rel="stylesheet" />
+            {% endblock %}
+
     </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+    <body class="bg-light">
+
+            <div class="row">
+                <div class="col-2">
+
+                    <div class="dropdown-menu col-12 float-left" style="display: block">
+                        <a class="dropdown-item" href="{{ asset('index.php') }}">Anasayfa</a>
+                        <a class="dropdown-item" href="{{ asset('index.php/hesapla') }}">İş planı yap</a>
+                        <a class="dropdown-item" href="{{ asset('index.php/developers') }}">Yazılımcılar</a>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="container">
+                    {% block body %}{% endblock %}
+                </div>
+            </div>
+
+        {% block javascripts %}
+            <script src="{{ asset('../templates/css/bootstrap.min.js') }}" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        {% endblock %}
     </body>
 </html>
 
-
-FATIH

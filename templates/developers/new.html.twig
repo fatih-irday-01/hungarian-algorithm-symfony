@@ -3,9 +3,9 @@
 {% block title %}New Developers{% endblock %}
 
 {% block body %}
-    <h1>Create new Developers</h1>
+    <h3 class="alert alert-info mt-3" >Yazılımcı Ekle</h3>
 
     {{ include('developers/_form.html.twig') }}
 
-    <a href="{{ path('developers_index') }}">back to list</a>
+    <a class="btn btn-dark float-lg-left" href="{{ path('developers_index') }}">Develepoer Listesine Dön</a>
 {% endblock %}
