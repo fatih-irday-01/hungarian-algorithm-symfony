@@ -15,7 +15,7 @@
 
                     <div class="dropdown-menu col-12 float-left" style="display: block">
                         <a class="dropdown-item" href="{{ asset('index.php') }}">Anasayfa</a>
-                        <a class="dropdown-item" href="{{ asset('index.php/hesapla') }}">İş planı yap</a>
+                        <a class="dropdown-item" href="{{ asset('index.php/calculation') }}">İş planı hazırla</a>
                         <a class="dropdown-item" href="{{ asset('index.php/developers') }}">Yazılımcılar</a>
                     </div>
 
@@ -28,9 +28,11 @@
                 </div>
             </div>
 
-        {% block javascripts %}
-            <script src="{{ asset('../templates/css/bootstrap.min.js') }}" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-        {% endblock %}
+        {% block javascripts %}{% endblock %}
+            <script src="{{ asset('../templates/js/jquery.min.js') }}"></script>
+            <script src="{{ asset('../templates/js/post.js') }}"></script>
+            <script src="{{ asset('../templates/js/bootstrap.min.js') }}" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
     </body>
 </html>
 

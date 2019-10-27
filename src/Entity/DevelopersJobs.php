@@ -16,15 +16,18 @@ class DevelopersJobs
      */
     private $id;
 
+
     /**
      * @ORM\Column(type="integer")
      */
     private $developer_id;
 
+
     /**
      * @ORM\Column(type="integer")
      */
     private $job_id;
+
 
     /**
      * @ORM\Column(type="integer")
@@ -36,10 +39,12 @@ class DevelopersJobs
      */
     private $sequence;
 
+
     public function getId(): ?int
     {
         return $this->id;
     }
+
 
     public function getDeveloperid(): ?int
     {
@@ -53,6 +58,7 @@ class DevelopersJobs
         return $this;
     }
 
+
     public function getJobid(): ?int
     {
         return $this->job_id;
@@ -64,6 +70,7 @@ class DevelopersJobs
 
         return $this;
     }
+
 
     public function getRunTimer(): ?int
     {
@@ -88,4 +95,6 @@ class DevelopersJobs
 
         return $this;
     }
+
+
 }

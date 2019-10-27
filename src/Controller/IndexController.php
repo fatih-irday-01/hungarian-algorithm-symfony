@@ -154,28 +154,32 @@ class IndexController extends AbstractController
 
 
     /**
-     * @Route("/hesapla", name="hesapla")
+     * @Route("/calculation", name="calculation")
      */
-    public function hesapla(DevelopersRepository $developersRepository, JobsRepository $jobsRepository)
+    public function calculation()
     {
 
-        return $this->render('Index/hesapla.html.twig');
+        return $this->render('Index/calculation.html.twig');
 
     }
 
     /**
-     * @Route("/hesaplamayap", name="hesaplama")
+     * @Route("/make-calculation", name="make_calculation")
      */
-    public function hesaplamayap(DevelopersRepository $developersRepository, JobsRepository $jobsRepository)
+    public function make_calculation(DevelopersRepository $developersRepository, JobsRepository $jobsRepository)
     {
 
         $developers = $developersRepository->findAll();
         $jobs       = $jobsRepository->findAll();
 
+
         $jobs = new JobToDeveloperServices($developers,$jobs);
         $result = $jobs->jobsToDeveloper();
 
         $manager = $this->getDoctrine()->getManager();
+        $q = $manager->createQuery('delete from  App\Entity\DevelopersJobs');
+        $q->execute();
+
         foreach ($result as $item)
         {
             $jobs = new DevelopersJobs();
@@ -187,9 +191,54 @@ class IndexController extends AbstractController
         }
         $manager->flush();
 
-        // TODO : Resposu'da dusun
         return new JsonResponse($result);
 
+    }
+
+
+
+
+
+    /**
+     * @Route("/make-calculation-job/{id}", name="make_calculation_job")
+     */
+    public function make_calculation_job(DevelopersJobs $developersJobs)
+    {
+
+        $manager = $this->getDoctrine()->getManager();
+
+        $sql = "SELECT 
+                sum(jobs.run_timer) as timer, count(jobs.id) as sequence, dev.name as developerName, job.name as jobName
+                FROM developers_jobs as jobs
+                inner join developers as dev on dev.id = jobs.developer_id
+                inner join jobs as job on job.id = :jobId
+                where jobs.developer_id = :devId
+                and jobs.sequence <= :sequence
+                and jobs.id <= :id";
+
+
+
+        $runTime = $manager->getConnection()->prepare($sql);
+
+        $runTime->bindValue('jobId',$developersJobs->getJobid());
+        $runTime->bindValue('devId',$developersJobs->getDeveloperid());
+        $runTime->bindValue('sequence',$developersJobs->getSequence());
+        $runTime->bindValue('id',$developersJobs->getId());
+        $runTime->execute();
+        $result = $runTime->fetch();
+
+
+
+        $data = [
+            'jobName' => $result['jobName'],
+            'developerName' => $result['developerName'],
+            'DeveloperRunTime' => $developersJobs->getRunTimer(),
+            'sequence' => $result['sequence'],
+            'startTime' => $result['timer'] - $developersJobs->getRunTimer(),
+            'endTime' => $result['timer'],
+        ];
+
+        return $this->render('Index/make_calculation_job.html.twig', $data);
     }
 
 

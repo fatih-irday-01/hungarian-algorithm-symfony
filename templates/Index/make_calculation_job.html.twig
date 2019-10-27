@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}yazılımcılara iş ata{% endblock %}
+
+{% block body %}
+
+
+    <h3 class="alert alert-info mt-3" >{{ jobName }}</h3>
+
+    <table class="table bg-white mt-5">
+
+        <tbody>
+
+            <tr>
+                <th width="30%" class="table-dark">Yazılımcı</th>
+                <td class="pl-4">{{ developerName }}</td>
+            </tr>
+
+            <tr>
+                <th class="table-dark">İş sırası</th>
+                <td class="pl-4">{{ sequence }}</td>
+            </tr>
+
+            <tr>
+                <th class="table-dark">Başlama Zamanı</th>
+                <td class="pl-4">{{ startTime }}</td>
+            </tr>
+
+            <tr>
+                <th class="table-dark">Yazılımcının Çalışma Süresi</th>
+                <td class="pl-4">{{ DeveloperRunTime }}</td>
+            </tr>
+
+            <tr>
+                <th class="table-dark">Teslim Süresi</th>
+                <td class="pl-4">{{ endTime }}</td>
+            </tr>
+
+        </tbody>
+
+    </table>
+
+
+
+{% endblock %}
