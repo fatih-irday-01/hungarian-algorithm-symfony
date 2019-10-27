@@ -9,6 +9,7 @@ use Hungarian\Hungarian;
 class JobToDeveloperServices
 {
 
+
     private $developerGroup = [];
     private $jobsGroup = [];
 
@@ -44,12 +45,13 @@ class JobToDeveloperServices
 
         foreach ($this->developers as $k => $developer) {
 
-            $devId = $developer->getId(); // islem yapilan dev id
             $this->developerGroup[$matrixDesc][$row] = $developer; // bu dev matrix'in kacinci sarasinda ?
 
             // yazilimci ve is sayisi esit deilse sanal is olustur.
             if($developerSize>count($treeJobs)){
-                $treeJobs[] = range(999,999+$developerSize);
+                for ($i=1; $i<=$developerSize-count($treeJobs); $i++){
+                    $treeJobs[] = range(999,999+$developerSize);
+                }
             }
 
             $row2 = 0;
@@ -58,7 +60,6 @@ class JobToDeveloperServices
 
 
                 if (is_object($treeJob)){ // gercek ismi
-                    $jobId = $treeJob->getId();
                     $this->jobsGroup[$matrixDesc][$row][$row2] = $treeJob; // job'un matrixteki yeri
                     // yazilimcinin is icin hesaplanan verimi
                     $yield = $this->developerYield($developer, $treeJob);
