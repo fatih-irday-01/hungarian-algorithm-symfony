@@ -8,15 +8,15 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-<div class="example-wrapper">
 
    {% if raporlar|first.plan|length == 0 %}
 
-      <p class="alert alert-danger"> İş atamaları yapılmamıştır. İş planı çıkartmak için <a href="{{ asset('index.php/calculation') }}">İş planı hazırla</a> sayfasını ziyaret edin.
-      </p>
+      <div class="alert alert-danger mt-5"> İş atamaları yapılmamıştır. İş planı çıkartmak için <a href="{{ asset('index.php/calculation') }}">İş planı hazırla</a> sayfasını ziyaret edin.
+      </div>
 
    {% else %}
 
+      <div class="example-wrapper">
       {% for rapor in raporlar %}
          <table class="table bg-white mt-5">
 

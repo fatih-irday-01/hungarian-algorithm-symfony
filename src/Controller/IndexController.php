@@ -156,10 +156,18 @@ class IndexController extends AbstractController
     /**
      * @Route("/calculation", name="calculation")
      */
-    public function calculation()
+    public function calculation(JobsRepository $jobsRepository)
     {
+        $jobs = $jobsRepository->findOneBy(['id'=>888888]);
+        if($jobs){
+            $dataStatus = true;
+        }else{
+            $dataStatus = false;
+        }
 
-        return $this->render('Index/calculation.html.twig');
+        return $this->render('Index/calculation.html.twig', [
+            'dataStatus' => $dataStatus
+        ]);
 
     }
 

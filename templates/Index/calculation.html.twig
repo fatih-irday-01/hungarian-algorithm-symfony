@@ -3,19 +3,28 @@
 {% block title %}yazılımcılara iş ata{% endblock %}
 
 {% block body %}
-    <div class="container mt-3">
-        Bu işlem yazılımcıların üzerindeki tüm işleri siler ve mevcut işleri yeniden dağıtır.
-    </div>
-    <button class="post btn btn-info btn-block mt-3"
-            send="{{ asset('index.php/make-calculation') }}"
-            go="{{ asset('index.php') }}"
-            error="beklenmeyen bir hata olustu verileri kontrol edip tekrar deneyiniz"
-            info="İşlemyapılıyor lütfen bekleyiniz !..">
-        Yazılımcıların iş planını yenile
-    </button>
 
-    <div class="alert-info mt-3 p-3" id="info-message"></div>
-    <div class="alert-danger mt-3 p-3" id="error-message"></div>
+
+    {% if dataStatus == false %}
+        <div class="alert alert-danger mt-5">
+            Tanımlanabilecek iş bulanamadi. İş listesini Çekmek için <code>app:getProviders</code> komutunu çalıştırın.
+        </div>
+    {% else %}
+
+        <div class="container mt-3">
+            Bu işlem yazılımcıların üzerindeki tüm işleri siler ve mevcut işleri yeniden dağıtır.
+        </div>
+        <button class="post btn btn-info btn-block mt-3"
+                send="{{ asset('index.php/make-calculation') }}"
+                go="{{ asset('index.php') }}"
+                error="beklenmeyen bir hata olustu verileri kontrol edip tekrar deneyiniz"
+                info="İşlemyapılıyor lütfen bekleyiniz !..">
+            Yazılımcıların iş planını yenile
+        </button>
+
+        <div class="alert-info mt-3 p-3" id="info-message"></div>
+        <div class="alert-danger mt-3 p-3" id="error-message"></div>
+    {% endif %}
 
 {% endblock %}
 
