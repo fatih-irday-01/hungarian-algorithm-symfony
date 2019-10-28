@@ -7,7 +7,7 @@ olduğunu öğrendim. Sistem bu algoritma üzerine çalışıyor.
 
 
 -   ``php bin/console app:getProviders`` komutu ile uzak sunuculardan işler toplanıyor.
--   Yeni sunucu eklemek için ``/var/www/html/symfony/blog/src/Service/Providers/Packets`` klasörüne sunucudan alınan verileri filtreliyen **Class** eklenmesi gerekiyor. eklenen **Class** ise ``/var/www/html/symfony/blog/src/Service/Providers/ProviderAll.php`` içerisinde tanımlanmalı.
+-   Yeni sunucu eklemek için ``src/Service/Providers/Packets`` klasörüne sunucudan alınan verileri filtreliyen **Class** eklenmesi gerekiyor. eklenen **Class** ise ``src/Service/Providers/ProviderAll.php`` içerisinde tanımlanmalı.
 
 
 
