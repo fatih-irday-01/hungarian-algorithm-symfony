@@ -197,12 +197,10 @@ class IndexController extends AbstractController
 
 
 
-
-
     /**
      * @Route("/make-calculation-job/{id}", name="make_calculation_job")
      */
-    public function make_calculation_job(DevelopersJobs $developersJobs)
+    public function make_calculation_job(DevelopersJobs $developersJobs, JobsRepository $jobsRepository)
     {
 
         $manager = $this->getDoctrine()->getManager();
@@ -228,8 +226,10 @@ class IndexController extends AbstractController
         $result = $runTime->fetch();
 
 
+        $jobs = $jobsRepository->findBy([], ['name'=>'asc']);
 
         $data = [
+            'jobs' => $jobs,
             'jobName' => $result['jobName'],
             'developerName' => $result['developerName'],
             'DeveloperRunTime' => $developersJobs->getRunTimer(),
@@ -238,9 +238,24 @@ class IndexController extends AbstractController
             'endTime' => $result['timer'],
         ];
 
+
         return $this->render('Index/make_calculation_job.html.twig', $data);
     }
 
+
+
+    /**
+     * @Route("/job-status", name="job_status")
+     */
+    public function job_status(JobsRepository $jobsRepository)
+    {
+        $jobs = $jobsRepository->findBy([], ['name'=>'asc']);
+
+        return $this->render('Index/job_status.html.twig', [
+            'jobs' => $jobs
+        ]);
+
+    }
 
 
 }

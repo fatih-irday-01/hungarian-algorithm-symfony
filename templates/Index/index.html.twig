@@ -10,6 +10,12 @@
 
 <div class="example-wrapper">
 
+   {% if raporlar|first.plan|length == 0 %}
+
+      <p class="alert alert-danger"> İş atamaları yapılmamıştır. İş planı çıkartmak için <a href="{{ asset('index.php/calculation') }}">İş planı hazırla</a> sayfasını ziyaret edin.
+      </p>
+
+   {% else %}
 
       {% for rapor in raporlar %}
          <table class="table bg-white mt-5">
@@ -56,6 +62,7 @@
       </table>
    {% endfor %}
 
+   {% endif %}
 
 
 

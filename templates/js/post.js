@@ -1,4 +1,6 @@
 $(function(){
+    
+    
     $('#error-message').hide()
     $('#info-message').hide()
     $('.post').click(function () {
@@ -25,5 +27,20 @@ $(function(){
             }
         );
     });
+    
+    
+    
+    
+    $('.select-searche').click(function () {
+
+        var idClass =  $(this).attr('id-select')
+        var senUrl  =  $(this).attr('send')
+
+        var id =  $(idClass).val()
+
+        location.href = senUrl.replace('{id}' , id )
+
+    })
+    
 
 })

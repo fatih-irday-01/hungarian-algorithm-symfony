@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}İş Durumu Sorgula{% endblock %}
+
+{% block body %}
+
+    <h6 class="alert alert-info mt-3" >İncelemek istediğiniz İşi Seçin</h6>
+
+    <div class="row">
+
+        <div class="col-10">
+
+
+            <select name="job" class="form-control mt-3 job select" >
+
+                {% for job in jobs %}
+                    <option value="{{ job.id }}">{{ job.name }}</option>
+                {% endfor %}
+
+            </select>
+
+        </div>
+        <div class="col-2">
+            <button type="button"
+                    class="form-control btn btn-primary mt-3 job select-searche"
+                    id-select="select"
+                    send="{{ asset('index.php/make-calculation-job/{id}') }}"
+            >
+                Getir
+            </button>
+        </div>
+
+    </div>
+
+
+
+{% endblock %}
+
+{% block javascripts %}{% endblock %}
+
